@@ -77,7 +77,7 @@ Define and finalize the MVP scope: confirm which features we’ll include for in
 ### Step 1. Clone the repo
 1. In your terminal, clone this github repository
 ```
-git clone https://github.com/dregiske/Personalized-News-Rec-Engine/tree/main
+git clone https://github.com/dregiske/Personalized-News-Rec-Engine.git
 cd Personalized-News-Rec-Engine
 ```
 ### Step 2. Virtual Environment
