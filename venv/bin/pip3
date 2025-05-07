@@ -1,4 +1,4 @@
-#!/Users/AndreGiske/Desktop/Personalized-News-Rec-Engine/venv/bin/python3
+#!/Users/AndreGiske/Desktop/Personalized-News-Rec-Engine/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

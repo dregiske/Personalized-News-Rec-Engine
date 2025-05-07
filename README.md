@@ -90,7 +90,7 @@ venv\Scripts\activate		# Windows
 
 2. Install core dependencies and record them
 ```
-pip install fastapi uvicorn sqlalchemy psycopg2-binary
+pip install fastapi uvicorn sqlalchemy psycopg2-binary alembic python-dotenv
 pip freeze > requirements.txt
 ```
 ### Step 3. Database Schema & Migrations
