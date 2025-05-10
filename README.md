@@ -135,3 +135,26 @@ app/
 ├── models.py        # ORM classes (tables)
 ├── schemas.py       # Pydantic request/response models
 └── crud.py          # simple DB‑access functions
+
+`__init__.py`:
+- (empty for now)
+- marks app/ as a package
+
+`database.py`:
+- Loads .env
+- Creates engine
+- SessionLocal, and Base
+
+`models.py`
+- Defines ORM classes (User, Article, Interaction) inheriting from Base
+
+`schemas.py`
+- Pydantic models (UserBase, UserOut) for request/response validation
+
+`crud.py`
+- A sample CRUD function (get_users) to read from the database
+
+`main.py`
+- FastAPI app instance
+- A health‑check route (GET /)
+- A /users/ endpoint to call get_users()
