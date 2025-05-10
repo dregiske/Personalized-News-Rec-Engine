@@ -124,3 +124,14 @@ docker run --name news-db \
 	-e POSTGRES_PASSWORD=pass \
 	-e POSTGRES_DB=newsdb \
 	-p 5432:5432 -d postgres
+
+
+### PROJECT LAYOUT
+1.
+app/
+├── __init__.py
+├── main.py          # FastAPI app & routers
+├── database.py      # SQLAlchemy engine & session
+├── models.py        # ORM classes (tables)
+├── schemas.py       # Pydantic request/response models
+└── crud.py          # simple DB‑access functions
