@@ -124,7 +124,7 @@ docker run --name news-db \
 	-e POSTGRES_PASSWORD=pass \
 	-e POSTGRES_DB=newsdb \
 	-p 5432:5432 -d postgres
-
+```
 
 ### PROJECT LAYOUT
 1.
