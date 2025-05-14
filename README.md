@@ -128,6 +128,7 @@ docker run --name news-db \
 
 ### PROJECT LAYOUT
 1.
+```
 .
 ├── app/
 │   ├── __init__.py
@@ -150,7 +151,7 @@ docker run --name news-db \
 └── tests/
     ├── __init__.py
     └── test_auth.py          # pytest tests for signup/login
-
+```
 
 `__init__.py`:
 - (empty for now)
