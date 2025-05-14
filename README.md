@@ -128,13 +128,29 @@ docker run --name news-db \
 
 ### PROJECT LAYOUT
 1.
-app/
-├── __init__.py
-├── main.py          # FastAPI app & routers
-├── database.py      # SQLAlchemy engine & session
-├── models.py        # ORM classes (tables)
-├── schemas.py       # Pydantic request/response models
-└── crud.py          # simple DB‑access functions
+.
+├── app/
+│   ├── __init__.py
+│   ├── main.py               # FastAPI instance & startup
+│   ├── database.py           # SQLAlchemy engine & SessionLocal
+│   ├── config.py             # SECRET_KEY, JWT settings, etc.
+│   ├── models.py             # SQLAlchemy ORM models (User, ...)
+│   ├── schemas.py            # Pydantic schemas (UserCreate, Token, ...)
+│   ├── security.py           # password‐hashing & JWT helpers
+│   ├── dependencies.py       # get_db(), get_current_user()
+│   └── routers/
+│       ├── __init__.py
+│       └── auth.py           # /signup & /token routes
+├── requirements.txt          # e.g. fastapi, uvicorn, sqlalchemy, passlib…
+├── alembic/                  # (if you’re using Alembic migrations)
+│   ├── versions/
+│   └── env.py
+├── Dockerfile                # container build
+├── docker-compose.yml        # local dev setup (Postgres, etc.)
+└── tests/
+    ├── __init__.py
+    └── test_auth.py          # pytest tests for signup/login
+
 
 `__init__.py`:
 - (empty for now)
