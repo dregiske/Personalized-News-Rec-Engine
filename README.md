@@ -143,7 +143,7 @@ docker run --name news-db \
 │       ├── __init__.py
 │       └── auth.py           # /signup & /token routes
 ├── requirements.txt          # e.g. fastapi, uvicorn, sqlalchemy, passlib…
-├── alembic/                  # (if you’re using Alembic migrations)
+├── migrations/                  # (if you’re using Alembic migrations)
 │   ├── versions/
 │   └── env.py
 ├── Dockerfile                # container build
@@ -152,26 +152,52 @@ docker run --name news-db \
     ├── __init__.py
     └── test_auth.py          # pytest tests for signup/login
 ```
+`.env`:
+- What it is: A simple text file at your project root containing key–value pairs of sensitive or environment‑specific settings.
+- Example entry:
+```
+DATABASE_URL=postgresql://news_user:supersecret@localhost:5432/newsdb
+SECRET_KEY=verylongrandomstring
+```
+- Why: Keeps credentials and other secrets out of your code and Git history. Lets you switch between dev/staging/prod simply by changing the file or setting real environment variables.
 
-`__init__.py`:
+`app/__init__.py`:
 - (empty for now)
 - marks app/ as a package
 
-`database.py`:
-- Loads .env
-- Creates engine
-- SessionLocal, and Base
+`app/database.py`:
+- Responsibilities:
+	- Creates the SQLAlchemy Engine using `DATABASE_URL` from `config.py`.
+	- Configures a SessionLocal factory for request‑scoped DB sessions.
+	- Declares the `Base = declarative_base()` that your ORM models inherit from.
+	- Provides a `get_db()` generator that your FastAPI routes use as a dependency, so sessions are opened and cleanly closed on each request.
+- Why: Keeps the database‑connection logic in one place, makes it trivial to “inject” a live SQLAlchemy session into any route or utility.
 
-`models.py`
-- Defines ORM classes (User, Article, Interaction) inheriting from Base
+`app/models.py`:
+- Defines ORM classes (`User`, `Article`, `Interaction`) inheriting from Base
 
-`schemas.py`
+`app/schemas.py`:
 - Pydantic models (UserBase, UserOut) for request/response validation
 
-`crud.py`
+`app/config.py`:
+- Responsibilities:
+	- Loads the `.env` file once at application startup.
+	- Exposes configuration variables to the rest of your application:
+		- `DATABASE_URL` for SQLAlchemy
+		- `SECRET_KEY`, `ALGORITHM`, `ACCESS_TOKEN_EXPIRE_MINUTES` for JWT/auth
+
+`app/crud.py`:
 - A sample CRUD function (get_users) to read from the database
 
-`main.py`
+`app/main.py`:
 - FastAPI app instance
 - A health‑check route (GET /)
 - A /users/ endpoint to call get_users()
+
+`migrations/env.py`:
+- Responsibilities:
+	- Loads the same `.env` file so it can read `DATABASE_URL`.
+	- Overrides the `sqlalchemy.url` setting in `alembic.ini` with that `DATABASE_URL`.
+	- Imports your app’s `Base.metadata` so Alembic knows about all your models.
+	- Defines “offline” (SQL‑dump) vs. “online” (live‑apply) migration functions.
+- Why: Ensures that when you run `alembic revision --autogenerate` or `alembic upgrade head`, the migration scripts see exactly the same database URL and model definitions as your running application.
