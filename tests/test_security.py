@@ -1,6 +1,8 @@
 import pytest
 from app.security import hash_password, verify_password, create_access_token
-from app.config   import SECRET_KEY, ALGORITHM
+from app.config   import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+
+
 
 def test_password_hash_and_verify():
     raw = "mypassword"

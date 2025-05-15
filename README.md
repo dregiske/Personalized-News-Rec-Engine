@@ -125,6 +125,16 @@ docker run --name news-db \
 	-e POSTGRES_DB=newsdb \
 	-p 5432:5432 -d postgres
 ```
+```
+docker pull postgres:15
+docker run -d \
+  --name newsdb-test \
+  -e POSTGRES_USER=news_user \
+  -e POSTGRES_PASSWORD=supersecret \
+  -e POSTGRES_DB=newsdb \
+  -p 5432:5432 \
+  postgres:15
+```
 
 ### PROJECT LAYOUT
 1.

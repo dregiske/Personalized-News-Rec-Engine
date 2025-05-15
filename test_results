@@ -1,0 +1,76 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.0, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/AndreGiske/Desktop/Personalized-News-Rec-Engine
+configfile: pytest.ini
+plugins: anyio-4.9.0, asyncio-0.26.0, cov-6.1.1
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=function, asyncio_default_test_loop_scope=function
+collected 3 items
+
+tests/test_auth.py E                                                     [ 33%]
+tests/test_security.py EE                                                [100%]
+
+==================================== ERRORS ====================================
+___________________ ERROR at setup of test_signup_and_login ____________________
+ScopeMismatch: You tried to access the function scoped fixture event_loop with a session scoped request object. Requesting fixture stack:
+tests/conftest.py:15:  def async_engine()
+Requested fixture:
+venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:1173:  def event_loop(request: 'FixtureRequest') -> 'Iterator[asyncio.AbstractEventLoop]'
+_______________ ERROR at setup of test_password_hash_and_verify ________________
+ScopeMismatch: You tried to access the function scoped fixture event_loop with a session scoped request object. Requesting fixture stack:
+tests/conftest.py:15:  def async_engine()
+Requested fixture:
+venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:1173:  def event_loop(request: 'FixtureRequest') -> 'Iterator[asyncio.AbstractEventLoop]'
+_____________________ ERROR at setup of test_jwt_roundtrip _____________________
+ScopeMismatch: You tried to access the function scoped fixture event_loop with a session scoped request object. Requesting fixture stack:
+tests/conftest.py:15:  def async_engine()
+Requested fixture:
+venv/lib/python3.12/site-packages/pytest_asyncio/plugin.py:1173:  def event_loop(request: 'FixtureRequest') -> 'Iterator[asyncio.AbstractEventLoop]'
+=============================== warnings summary ===============================
+app/database.py:19
+  /Users/AndreGiske/Desktop/Personalized-News-Rec-Engine/app/database.py:19: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+app/models.py:5
+  /Users/AndreGiske/Desktop/Personalized-News-Rec-Engine/app/models.py:5: MovedIn20Warning: The ``declarative_base()`` function is now available as sqlalchemy.orm.declarative_base(). (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+    Base = declarative_base()
+
+venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:323
+  /Users/AndreGiske/Desktop/Personalized-News-Rec-Engine/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:323: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.11/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373
+  /Users/AndreGiske/Desktop/Personalized-News-Rec-Engine/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
+  * 'orm_mode' has been renamed to 'from_attributes'
+    warnings.warn(message, UserWarning)
+
+venv/lib/python3.12/site-packages/_pytest/config/__init__.py:1441
+  /Users/AndreGiske/Desktop/Personalized-News-Rec-Engine/venv/lib/python3.12/site-packages/_pytest/config/__init__.py:1441: PytestConfigWarning: Unknown config option: env
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+venv/lib/python3.12/site-packages/passlib/utils/__init__.py:854
+  /Users/AndreGiske/Desktop/Personalized-News-Rec-Engine/venv/lib/python3.12/site-packages/passlib/utils/__init__.py:854: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+    from crypt import crypt as _crypt
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.12.0-final-0 _______________
+
+Name                  Stmts   Miss  Cover   Missing
+---------------------------------------------------
+app/__init__.py           0      0   100%
+app/config.py            10      1    90%   16
+app/crud.py               9      6    33%   5-11
+app/database.py          12      4    67%   23-27
+app/dependencies.py      20     20     0%   1-27
+app/main.py              12      2    83%   13, 17
+app/models.py            25      0   100%
+app/schemas.py           18      0   100%
+app/security.py          15      6    60%   10, 13, 16-19
+---------------------------------------------------
+TOTAL                   121     39    68%
+=========================== short test summary info ============================
+ERROR tests/test_auth.py::test_signup_and_login - Failed: ScopeMismatch: You ...
+ERROR tests/test_security.py::test_password_hash_and_verify - Failed: ScopeMi...
+ERROR tests/test_security.py::test_jwt_roundtrip - Failed: ScopeMismatch: You...
+======================== 6 warnings, 3 errors in 0.07s =========================
